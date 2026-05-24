@@ -20,9 +20,7 @@ jobs:
         uses: mathieudutour/github-tag-action@v6.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          default_bump: minor
           dry_run: ${{ github.event_name == 'pull_request' }}
-          pre_release_branches: develop
    
       - name: create release
         uses: ncipollo/release-action@v1
