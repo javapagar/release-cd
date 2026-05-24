@@ -15,6 +15,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6.0.2
   
-      - name: hello
-        run: echo "hello actions"
-  
+      - name: GitHub Tag
+        uses: mathieudutour/github-tag-action@v6.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          dry_run: ${{ github.event_name == 'pull_request' }}
+   
