@@ -15,9 +15,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6.0.2
   
-      - name: GitHub Tag
-        uses: mathieudutour/github-tag-action@v6.2
+      - name: create Tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           dry_run: ${{ github.event_name == 'pull_request' }}
    
+      - name: create release
+        uses: ncipollo/release-action@v1
+        if: ${{ github.event_name != 'pull_request' }}
+        with:
+          tag: ${{ steps.tag_version.outputs.new_tag }}
+          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.tag_version.outputs.changelog }}
