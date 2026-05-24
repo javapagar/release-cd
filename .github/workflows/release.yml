@@ -1,0 +1,20 @@
+name: create release
+
+on:
+  push: 
+    branches:
+      - develop
+
+permissions: 
+  contents: read
+
+jobs:
+  create_release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.2
+  
+      - name: hello
+        run: echo "hello actions"
+  
